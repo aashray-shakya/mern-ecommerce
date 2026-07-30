@@ -17,6 +17,3 @@ router
   .delete(protect, admin, deleteProduct);
 
 module.exports = router;
-
-//testing my automatic github pushing tool
-//test 2 of automatic github pushing tool
