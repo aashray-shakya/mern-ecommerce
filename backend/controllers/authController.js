@@ -48,7 +48,11 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+// @desc   Get currently logged-in user
+// @route  GET /api/auth/me
+const getMe = async (req, res) => {
+  res.status(200).json(req.user);
+};
 // @desc   Logout user (clear cookie)
 // @route  POST /api/auth/logout
 const logoutUser = (req, res) => {
@@ -59,4 +63,4 @@ const logoutUser = (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+module.exports = { registerUser, loginUser, logoutUser, getMe };

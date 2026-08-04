@@ -37,28 +37,54 @@ export default function ProductDetailPage() {
     }
   };
 
-  if (loading) return <p className="p-6">Loading...</p>;
-  if (error) return <p className="p-6 text-red-600">{error}</p>;
+  if (loading) return <p className="p-6 text-[#ece9e2]">Loading...</p>;
+  if (error) return <p className="p-6 text-red-400">{error}</p>;
 
   return (
-    <main className="p-6 max-w-2xl">
-      <h1 className="text-2xl font-bold">{product.name}</h1>
-      <p className="text-gray-600 mt-1">{product.category}</p>
-      <p className="mt-4">{product.description}</p>
-      <p className="text-xl font-bold mt-4">${product.price.toFixed(2)}</p>
-      <p className="text-sm text-gray-500 mt-1">
-        {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
-      </p>
+    <main className="p-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="aspect-square w-full glass rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-[#9a968f]">
+            No image
+          </div>
+        )}
+      </div>
 
-      <button
-        onClick={handleAddToCart}
-        disabled={product.stock === 0}
-        className="mt-6 bg-black text-white px-6 py-2 rounded disabled:opacity-40"
-      >
-        Add to Cart
-      </button>
+      <div className="glass rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <p className="text-xs uppercase tracking-wide text-[#9a968f] mb-2">
+          {product.category}
+        </p>
+        <h1 className="text-3xl font-bold tracking-tight text-[#ece9e2]">
+          {product.name}
+        </h1>
+        <p className="mt-4 text-[#ece9e2]/80">{product.description}</p>
 
-      {message && <p className="mt-3 text-sm">{message}</p>}
+        <span className="inline-block mt-6 bg-[#d98e4a] text-[#0f1115] text-lg font-semibold px-3 py-1.5 rounded">
+          ${product.price.toFixed(2)}
+        </span>
+
+        <p className="text-sm text-[#9a968f] mt-3">
+          {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+        </p>
+
+        <button
+          onClick={handleAddToCart}
+          disabled={product.stock === 0}
+          className="mt-6 bg-[#d98e4a] text-[#0f1115] font-semibold px-6 py-2.5 rounded-lg hover:bg-[#6fa8c9] transition disabled:opacity-40"
+        >
+          Add to Cart
+        </button>
+
+        {message && <p className="mt-3 text-sm text-[#ece9e2]/70">{message}</p>}
+      </div>
     </main>
   );
 }
+
+//auto push test

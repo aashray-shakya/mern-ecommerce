@@ -28,18 +28,37 @@ export default function ProductsPage() {
   if (error) return <p className="p-6 text-red-600">{error}</p>;
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Products</h1>
+    <main className="p-6 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold tracking-tight mb-8">Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((product) => (
           <Link
             key={product._id}
             href={`/products/${product._id}`}
-            className="border rounded-lg p-4 hover:shadow-md transition"
+            className="group bg-white border border-[#e4dfd3] rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition"
           >
-            <h2 className="font-semibold">{product.name}</h2>
-            <p className="text-gray-600 text-sm">{product.category}</p>
-            <p className="mt-2 font-bold">${product.price.toFixed(2)}</p>
+            <div className="aspect-square w-full bg-[#efebe2] overflow-hidden">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-[#8a8578] text-sm">
+                  No image
+                </div>
+              )}
+            </div>
+            <div className="p-4">
+              <p className="text-xs uppercase tracking-wide text-[#8a8578] mb-1">
+                {product.category}
+              </p>
+              <h2 className="font-semibold">{product.name}</h2>
+              <span className="inline-block mt-2 bg-[#c97b2e] text-white text-sm font-semibold px-2 py-1 rounded">
+                ${product.price.toFixed(2)}
+              </span>
+            </div>
           </Link>
         ))}
       </div>

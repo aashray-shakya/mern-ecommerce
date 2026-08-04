@@ -3,19 +3,22 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../lib/api";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { fetchUser } = useAuth();
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
       await api.post("/auth/login", { email, password });
+      await fetchUser();
       router.push("/products");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
