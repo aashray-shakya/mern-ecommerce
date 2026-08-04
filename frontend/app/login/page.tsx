@@ -1,4 +1,4 @@
-    "use client";
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,10 @@ export default function LoginPage() {
   const router = useRouter();
   const { fetchUser } = useAuth();
 
-const handleSubmit = async (e) => {
+  const inputClass =
+    "bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[#ece9e2] placeholder-[#9a968f] focus:outline-none focus:border-[#d98e4a]/50 transition";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -26,15 +29,20 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <main className="p-6 max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <main className="p-6 max-w-sm mx-auto mt-10">
+      <h1 className="text-3xl font-bold tracking-tight text-[#ece9e2] mb-8">
+        Login
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+      >
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -42,20 +50,20 @@ const handleSubmit = async (e) => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         <button
           type="submit"
-          className="bg-black text-white py-2 rounded"
+          className="bg-[#d98e4a] text-[#0f1115] font-semibold py-2.5 rounded-lg hover:bg-[#6fa8c9] transition"
         >
           Log In
         </button>
       </form>
-      <p className="text-sm mt-4">
+      <p className="text-sm mt-4 text-[#9a968f]">
         No account?{" "}
-        <a href="/register" className="underline">
+        <a href="/register" className="underline text-[#d98e4a]">
           Register here
         </a>
       </p>

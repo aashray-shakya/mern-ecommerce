@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../lib/api";
+import { useAuth } from "../../context/AuthContext";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -10,6 +11,10 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { fetchUser } = useAuth();
+
+  const inputClass =
+    "bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[#ece9e2] placeholder-[#9a968f] focus:outline-none focus:border-[#d98e4a]/50 transition";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +22,7 @@ export default function RegisterPage() {
 
     try {
       await api.post("/auth/register", { name, email, password });
+      await fetchUser();
       router.push("/products");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -24,15 +30,20 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="p-6 max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Register</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <main className="p-6 max-w-sm mx-auto mt-10">
+      <h1 className="text-3xl font-bold tracking-tight text-[#ece9e2] mb-8">
+        Register
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+      >
         <input
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -40,7 +51,7 @@ export default function RegisterPage() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -48,20 +59,20 @@ export default function RegisterPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         <button
           type="submit"
-          className="bg-black text-white py-2 rounded"
+          className="bg-[#d98e4a] text-[#0f1115] font-semibold py-2.5 rounded-lg hover:bg-[#6fa8c9] transition"
         >
           Register
         </button>
       </form>
-      <p className="text-sm mt-4">
+      <p className="text-sm mt-4 text-[#9a968f]">
         Already have an account?{" "}
-        <a href="/login" className="underline">
+        <a href="/login" className="underline text-[#d98e4a]">
           Login here
         </a>
       </p>

@@ -34,16 +34,24 @@ export default function CheckoutPage() {
     }
   };
 
+  const inputClass =
+    "bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[#ece9e2] placeholder-[#9a968f] focus:outline-none focus:border-[#d98e4a]/50 transition";
+
   return (
     <main className="p-6 max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <h1 className="text-3xl font-bold tracking-tight text-[#ece9e2] mb-8">
+        Checkout
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+      >
         <input
           name="fullName"
           placeholder="Full Name"
           value={form.fullName}
           onChange={handleChange}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -51,7 +59,7 @@ export default function CheckoutPage() {
           placeholder="Address"
           value={form.address}
           onChange={handleChange}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -59,7 +67,7 @@ export default function CheckoutPage() {
           placeholder="City"
           value={form.city}
           onChange={handleChange}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -67,7 +75,7 @@ export default function CheckoutPage() {
           placeholder="Postal Code"
           value={form.postalCode}
           onChange={handleChange}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
         <input
@@ -75,14 +83,14 @@ export default function CheckoutPage() {
           placeholder="Country"
           value={form.country}
           onChange={handleChange}
-          className="border rounded px-3 py-2"
+          className={inputClass}
           required
         />
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         <button
           type="submit"
           disabled={submitting}
-          className="bg-black text-white py-2 rounded disabled:opacity-50"
+          className="bg-[#d98e4a] text-[#0f1115] font-semibold py-2.5 rounded-lg hover:bg-[#6fa8c9] transition disabled:opacity-50"
         >
           {submitting ? "Placing order..." : "Place Order"}
         </button>
