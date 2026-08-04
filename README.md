@@ -42,26 +42,23 @@ A full-stack e-commerce application built with MongoDB, Express, Next.js, and No
 
 ## Project Structure
 
-mern-ecommerce/
-├── backend/
-│ ├── config/ # Database connection
-│ ├── controllers/ # Route logic (products, auth, cart, orders)
-│ ├── middleware/ # JWT auth + admin protection
-│ ├── models/ # Mongoose schemas
-│ ├── routes/ # API route definitions
-│ ├── utils/ # JWT token generation
-│ └── server.js
-└── frontend/
-├── app/ # Next.js App Router pages
-│ ├── admin/ # Admin product & order management
-│ ├── cart/
-│ ├── checkout/
-│ ├── login/ register/
-│ ├── orders/
-│ └── products/
-├── components/ # Navbar, AdminRoute guard
-├── context/ # AuthContext (global user state)
-└── lib/ # Axios API client
+**Backend** (`backend/`)
+- `config/` — Database connection
+- `controllers/` — Route logic (products, auth, cart, orders)
+- `middleware/` — JWT auth + admin protection
+- `models/` — Mongoose schemas
+- `routes/` — API route definitions
+- `utils/` — JWT token generation
+- `server.js` — App entry point
+
+**Frontend** (`frontend/`)
+- `app/` — Next.js App Router pages
+  - `admin/` — Admin product & order management
+  - `cart/`, `checkout/`, `login/`, `register/`, `orders/`, `products/`
+- `components/` — Navbar, AdminRoute guard
+- `context/` — AuthContext (global user state)
+- `lib/` — Axios API client
+
 ## Getting Started
 
 ### Prerequisites
