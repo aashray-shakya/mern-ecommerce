@@ -62,7 +62,6 @@ mern-ecommerce/
 ├── components/ # Navbar, AdminRoute guard
 ├── context/ # AuthContext (global user state)
 └── lib/ # Axios API client
-
 ## Getting Started
 
 ### Prerequisites
