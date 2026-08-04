@@ -107,3 +107,5 @@ const removeFromCart = async (req, res) => {
 };
 
 module.exports = { getCart, addToCart, updateCartItem, removeFromCart };
+
+//git commit test
