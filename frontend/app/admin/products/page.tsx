@@ -83,42 +83,58 @@ export default function AdminProductsPage() {
     fetchProducts();
   };
 
+  const inputClass =
+    "bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[#ece9e2] placeholder-[#9a968f] focus:outline-none focus:border-[#d98e4a]/50 transition";
+
   return (
     <AdminRoute>
-      <main className="p-6 max-w-3xl">
-        <h1 className="text-2xl font-bold mb-6">Manage Products</h1>
+      <main className="p-6 max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold tracking-tight text-[#ece9e2] mb-8">
+          Manage Products
+        </h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 border p-4 rounded mb-8">
-          <h2 className="font-semibold">{editingId ? "Edit Product" : "Add New Product"}</h2>
-          <input name="name" placeholder="Name" value={form.name} onChange={handleChange} className="border rounded px-3 py-2" required />
-          <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} className="border rounded px-3 py-2" required />
-          <input name="price" type="number" step="0.01" placeholder="Price" value={form.price} onChange={handleChange} className="border rounded px-3 py-2" required />
-          <input name="category" placeholder="Category" value={form.category} onChange={handleChange} className="border rounded px-3 py-2" required />
-          <input name="image" placeholder="Image URL (optional)" value={form.image} onChange={handleChange} className="border rounded px-3 py-2" />
-          <input name="stock" type="number" placeholder="Stock" value={form.stock} onChange={handleChange} className="border rounded px-3 py-2" required />
-          {error && <p className="text-red-600 text-sm">{error}</p>}
+        <form
+          onSubmit={handleSubmit}
+          className="glass rounded-2xl p-6 flex flex-col gap-3 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+        >
+          <h2 className="font-semibold text-[#ece9e2]">
+            {editingId ? "Edit Product" : "Add New Product"}
+          </h2>
+          <input name="name" placeholder="Name" value={form.name} onChange={handleChange} className={inputClass} required />
+          <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} className={inputClass} required />
+          <input name="price" type="number" step="0.01" placeholder="Price" value={form.price} onChange={handleChange} className={inputClass} required />
+          <input name="category" placeholder="Category" value={form.category} onChange={handleChange} className={inputClass} required />
+          <input name="image" placeholder="Image URL (optional)" value={form.image} onChange={handleChange} className={inputClass} />
+          <input name="stock" type="number" placeholder="Stock" value={form.stock} onChange={handleChange} className={inputClass} required />
+          {error && <p className="text-red-400 text-sm">{error}</p>}
           <div className="flex gap-3">
-            <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+            <button type="submit" className="bg-[#d98e4a] text-[#0f1115] font-semibold px-4 py-2 rounded-lg hover:bg-[#6fa8c9] transition">
               {editingId ? "Update Product" : "Add Product"}
             </button>
             {editingId && (
-              <button type="button" onClick={resetForm} className="border px-4 py-2 rounded">
+              <button type="button" onClick={resetForm} className="bg-white/10 text-[#ece9e2] px-4 py-2 rounded-lg hover:bg-white/20 transition">
                 Cancel
               </button>
             )}
           </div>
         </form>
 
-        <div className="flex flex-col gap-2">
+        <div className="glass rounded-2xl divide-y divide-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           {products.map((product) => (
-            <div key={product._id} className="flex justify-between items-center border-b pb-2">
+            <div key={product._id} className="flex justify-between items-center p-4">
               <div>
-                <p className="font-semibold">{product.name}</p>
-                <p className="text-sm text-gray-600">${product.price.toFixed(2)} · {product.stock} in stock</p>
+                <p className="font-semibold text-[#ece9e2]">{product.name}</p>
+                <p className="text-sm text-[#9a968f]">
+                  ${product.price.toFixed(2)} · {product.stock} in stock
+                </p>
               </div>
               <div className="flex gap-3">
-                <button onClick={() => handleEdit(product)} className="text-sm underline">Edit</button>
-                <button onClick={() => handleDelete(product._id)} className="text-sm text-red-600 underline">Delete</button>
+                <button onClick={() => handleEdit(product)} className="text-sm text-[#6fa8c9] hover:underline">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(product._id)} className="text-sm text-red-400 hover:underline">
+                  Delete
+                </button>
               </div>
             </div>
           ))}
